@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[PhoneNumbers]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[PhoneNumber] NVARCHAR(30) NOT NULL,
+	[DateCreated] DATETIME2 NOT NULL DEFAULT GetDate(), 
+    [DateUpdated] DATETIME2 NOT NULL DEFAULT GetDate()
+)

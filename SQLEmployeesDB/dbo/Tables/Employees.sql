@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[Employees]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [FirstName] VARCHAR(50) NOT NULL, 
+    [LastName] VARCHAR(50) NOT NULL, 
+    [Salary] MONEY NOT NULL DEFAULT 30000,
+    [DateHired] DATETIME2 NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [DateCreated] DATETIME2 NOT NULL DEFAULT GetDate(), 
+    [DateUpdated] DATETIME2 NOT NULL DEFAULT GetDate()
+)
