@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using RecordLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace RecordLibrary.SQLHelpers
 {
-    public class SQLDataAccess
+    internal class SQLDataAccess : IDataAccess
     {
         public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionString)
         {

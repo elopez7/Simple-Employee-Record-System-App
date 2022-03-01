@@ -7,5 +7,6 @@ using RecordLibrary.Models;
 
 
 UserInterface.DisplayTitle();
+UserInterface.SelectDatabaseProvider();
 UserInterface.DisplayMainMenuOptions();
 UserInterface.MainMenuInput();

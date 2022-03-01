@@ -66,16 +66,6 @@ namespace RecordLibrary
             }
             return output;
         }
-
-        public static void PromoteEmployee(this FullEmployeeModel employee,bool isPromotion, decimal salaryChangeAmount = 1000)
-        {
-            if(isPromotion)
-            {
-                employee.Salary += salaryChangeAmount;
-                return;
-            }
-            employee.Salary -= salaryChangeAmount;
-        }
     }
 }
 

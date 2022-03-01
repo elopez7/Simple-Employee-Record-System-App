@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleUI.IO
 {
-    public static class UserInterface
+    internal static class UserInterface
     {
+        static Dictionary<string, Action<string>> databaseProviders = new Dictionary<string, Action<string>>()
+        {
+            {"sqlserver", ConsoleHelpers.ChooseQSLServer},
+            {"sqlite", ConsoleHelpers.ChooseQSLite }
+        };
+
         static Dictionary<string, Action> executableOptions = new Dictionary<string, Action>()
         {
             { "hire", ConsoleHelpers.HireEmployee },
@@ -57,6 +63,31 @@ namespace ConsoleUI.IO
             Console.WriteLine();
         }
 
+        public static void SelectDatabaseProvider()
+        {
+            while (UserInterface.IsAppRunning)
+            {
+                DisplayAvailableDatabaseProviders();
+                string? userInput = "Select a database provider: ".RequestString();                
+                while (string.IsNullOrWhiteSpace(userInput))
+                {
+                    userInput = "Select a database provider".RequestString();
+                }
+
+                if (databaseProviders.ContainsKey(userInput.ToLower()))
+                {
+                    Console.Clear();
+                    databaseProviders[userInput.ToLower()](userInput.ToLower());
+                    break;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Command not found");
+                }
+            }
+        }
+
         public static void MainMenuInput()
         {
             while (UserInterface.IsAppRunning)
@@ -73,7 +104,7 @@ namespace ConsoleUI.IO
                 if (executableOptions.ContainsKey(userInput.ToLower()))
                 {
                     Console.Clear();
-                    executableOptions[userInput]();
+                    executableOptions[userInput.ToLower()]();
                 }
                 else
                 {
@@ -83,16 +114,28 @@ namespace ConsoleUI.IO
             }
         }
 
-        private static void ExitApplication()
-        {
-            IsAppRunning = false;
-        }
-
         public static void DisplayListHeader(ConsoleColor foregroundColor, string employeeType)
         {
             Console.ForegroundColor = foregroundColor;
             Console.WriteLine($"----{employeeType} EMPLOYEES----");
             Console.ResetColor();
+        }
+
+        private static void ExitApplication()
+        {
+            IsAppRunning = false;
+        }
+
+        private static void DisplayAvailableDatabaseProviders()
+        {
+            Console.WriteLine("Available Providers");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            foreach (KeyValuePair<string, Action<string>> dbProvider in databaseProviders)
+            {
+                Console.WriteLine($"{dbProvider.Key}");
+            }
+            Console.ResetColor();
+            Console.WriteLine();
         }
     }
 }

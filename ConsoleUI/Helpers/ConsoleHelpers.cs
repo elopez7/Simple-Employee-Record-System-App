@@ -1,16 +1,31 @@
-﻿using RecordLibrary.SQLHelpers;
+﻿using RecordLibrary.BaseClasses;
+using RecordLibrary.Interfaces;
+using RecordLibrary.SQLHelpers;
+using RecordLibrary.SQLiteHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using ConsoleUI.IO;
 
 namespace ConsoleUI.Helpers
 {
-    public static class ConsoleHelpers
+    internal static class ConsoleHelpers
     {
-        private static DatabaseOperations operations = new DatabaseOperations(DatabaseHelper.GetConnectionString());
+        private static DatabaseOperations? operations; //= new SQLOperations(GetConnectionString("SqlString"));
+        
 
+        public static void ChooseQSLServer(string databaseProvider)
+        {
+            operations = new SQLOperations(GetConnectionString(databaseProvider));
+        }
+
+        public static void ChooseQSLite(string databaseProvider)
+        {
+            operations = new SQLiteOperations(GetConnectionString(databaseProvider));
+        }
 
         public static void InitializeData()
         {
@@ -60,6 +75,21 @@ namespace ConsoleUI.Helpers
         {
             DatabaseHelper.DemoteEmployee(operations);
             Console.WriteLine("Demote Operation Success!");
+        }
+
+        private static string GetConnectionString(string connectionStringName = "Default")
+        {
+            string output = string.Empty;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+            var config = builder.Build();
+
+            output = config.GetConnectionString(connectionStringName);
+
+            return output;
         }
     }
 }

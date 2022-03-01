@@ -3,27 +3,12 @@ using ConsoleUI.IO;
 using RecordLibrary;
 using RecordLibrary.SQLHelpers;
 using RecordLibrary.Models;
+using RecordLibrary.BaseClasses;
 
 namespace ConsoleUI.Helpers
 {
     public static class DatabaseHelper
     {
-        public static string GetConnectionString(string connectionStringName = "Default")
-        {
-            string output = string.Empty;
-
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-
-            var config = builder.Build();
-
-            output = config.GetConnectionString(connectionStringName);
-
-            return output;
-
-        }
-
         public static void CreateFakeEmployee(DatabaseOperations dbOperations)
         {
             FullEmployeeModel employee = new()
@@ -80,7 +65,7 @@ namespace ConsoleUI.Helpers
 
         public static void GetAllEmployess(DatabaseOperations dbOperations)
         {
-            var employees = dbOperations.GetAllFullEmployees();
+            var employees = dbOperations.GetAllEmployees();
             UserInterface.DisplayListHeader(ConsoleColor.Green, "ALL");
             foreach (var employee in employees)
             {
