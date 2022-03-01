@@ -1,9 +1,4 @@
 ﻿using ConsoleUI.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleUI.IO
 {
@@ -25,6 +20,7 @@ namespace ConsoleUI.IO
             { "list", ConsoleHelpers.GetAllEmployees},
             { "current", ConsoleHelpers.GetCurrentEmployees },
             { "former", ConsoleHelpers.GetFormerEmployees },
+            { "switch", SelectDatabaseProvider },
             { "help", DisplayMainMenuOptions},
             { "quit", ExitApplication }
         };
@@ -50,6 +46,7 @@ namespace ConsoleUI.IO
                 { "list", "Show a list of current and former employees." },
                 { "current", "Show a list of current employees." },
                 { "former", "Show a list of former employees." },
+                { "switch", "Switch database provider." },
                 { "help", "Show this menu." },
                 { "quit", "Exit the application." },
             };

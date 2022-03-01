@@ -1,14 +1,7 @@
 ﻿using RecordLibrary.BaseClasses;
-using RecordLibrary.Interfaces;
 using RecordLibrary.SQLHelpers;
 using RecordLibrary.SQLiteHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using ConsoleUI.IO;
 
 namespace ConsoleUI.Helpers
 {

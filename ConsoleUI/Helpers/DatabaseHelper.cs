@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using ConsoleUI.IO;
+﻿using ConsoleUI.IO;
 using RecordLibrary;
-using RecordLibrary.SQLHelpers;
 using RecordLibrary.Models;
 using RecordLibrary.BaseClasses;
 
